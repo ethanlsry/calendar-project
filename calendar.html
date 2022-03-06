@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Calendar</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script src="calendar.js"></script>
+        <link rel="stylesheet" href="calendar.css">
+    
+        <!--USER AUTHENTICATION SECTION-->
+        <div id="user_authentication">
+            <div class="log_in">
+                <h2>Welcome to your personal calender. Please log in below.</h2>
+                <label for="username_attempt">username:</label>
+                <input type="text" id="username_attempt" required>
+                <label for="password_attempt">password:</label>
+                <input type="password" id="password_attempt" required>
+                <button type="submit" id="log_in_button">log in</button>
+            </div>
+
+            <!--user can create new username and password-->
+            <div>
+                <h3>Add new user:</h3>
+                <label for="newuser">new username:</label>
+                <input type="text" id="newuser" required>
+                <label for="newpassword_unhashed">new password:</label>
+                <input type="password" id="newpassword_unhashed" required>
+
+                <button type="submit" id="create_user_button">create user</button>
+            </div>
+
+            <!--shows whether user is logged in as valid user or guest-->
+            <div>
+                <!-- <h3 id="is_active_user?">you are logged in as guest</h3> -->
+                <h3 id="is_active_user?">welcome</h3>
+                <!-- <input type="hidden" name="token" id="log_out_token" value="<?php echo $_SESSION['token'];?>"/> -->
+                <input type="hidden" name="token" id="log_out_token" value="placeholder"/>
+                <!-- why doesn't the token work here?-->
+                <button type="submit" id="log_out_button">Log Out</button>
+            </div>
+        </div>
+
+
+        <!--CALENDAR DISPLAY SECTION-->
+        <div id="current_date" style="text-align:center">
+            <h3 class="cover"> Current Date: </h3>
+            <!--does NOT pass validation: Element p not allowed as child of element strong in this context. (Suppressing further errors from this subtree.)-->
+            <p style="font-size:30px;font-weight: bold" id = "currentMonthName"></p>
+            <p style="font-size:30px;font-weight: bold" id = "currentYear"></p>
+        </div>
+        <div id="calendar_display">
+            <div class="button_holder">
+                <button type="submit" class = "change_month" id="month_back">previous month</button>
+            </div>
+            <div id="middle">
+                <!-- <table id = "daysofweek">
+                    
+                </table> -->
+                <table id = "Calendar">
+                    <tr>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                    <tr>
+                        <td class = "parent" id = "1"></td>
+                        <td class = "parent" id = "2"></td>
+                        <td class = "parent" id = "3"></td>
+                        <td class = "parent" id = "4"></td>
+                        <td class = "parent" id = "5"></td>
+                        <td class = "parent" id = "6"></td>
+                        <td class = "parent" id = "7"></td>
+                    </tr>
+                    <tr>
+                        <td class = "parent" id = "8"></td>
+                        <td class = "parent" id = "9"></td>
+                        <td class = "parent" id = "10"></td>
+                        <td class = "parent" id = "11"></td>
+                        <td class = "parent" id = "12"></td>
+                        <td class = "parent" id = "13"></td>
+                        <td class = "parent" id = "14"></td>
+                    </tr> 
+                    <tr>
+                        <td class = "parent" id = "15"></td>
+                        <td class = "parent" id = "16"></td>
+                        <td class = "parent" id = "17"></td>
+                        <td class = "parent" id = "18"></td>
+                        <td class = "parent" id = "19"></td>
+                        <td class = "parent" id = "20"></td>
+                        <td class = "parent" id = "21"></td>
+                    </tr>
+                    <tr>
+                        <td class = "parent" id = "22"></td>
+                        <td class = "parent" id = "23"></td>
+                        <td class = "parent" id = "24"></td>
+                        <td class = "parent" id = "25"></td>
+                        <td class = "parent" id = "26"></td>
+                        <td class = "parent" id = "27"></td>
+                        <td class = "parent" id = "28"></td>
+                    </tr>
+                    <tr>
+                        <td class = "parent" id = "29"></td>
+                        <td class = "parent" id = "30"></td>
+                        <td class = "parent" id = "31"></td>
+                        <td class = "parent" id = "32"></td>
+                        <td class = "parent" id = "33"></td>
+                        <td class = "parent" id = "34"></td>
+                        <td class = "parent" id = "35"></td>
+                    </tr>
+                    <tr>
+                        <td class = "parent" id = "36"></td>
+                        <td class = "parent" id = "37"></td>
+                        <td class = "parent" id = "38"></td>
+                        <td class = "parent" id = "39"></td>
+                        <td class = "parent" id = "40"></td>
+                        <td class = "parent" id = "41"></td>
+                        <td class = "parent" id = "42"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="button_holder">
+                <button type="submit" class="change_month" id="month_fwd">next month</button>
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class = "legend">
+            <div class='l-title'>Event Tags</div>
+            <div class='l-scale'>
+            <ul class='l-labels'>
+                <li><span style='background:red;'></span>Class</li>
+                <li><span style='background:blue;'></span>Work</li>
+                <li><span style='background:green;'></span>Social</li>
+                <li><span style='background:yellow;'></span>Travel</li>
+                <li><span style='background:purple;'></span>Self-Care</li>
+            </ul>
+            </div>
+        </div>
+        <br>
+
+
+
+
+
+        <!--USER MANIPULATION SECTION-->
+        <!--user can create new events-->
+        <div class="hover_here">
+            <h3>Add an event:</h3>
+            <div class="event_planning">
+                <label for="create_event_name">Event Name:</label>
+                <input type="text" id="create_event_name" required>
+
+                <label for="create_event_year">Year:</label>
+                <input type = "tel" style="width:50px;" id = "create_event_year" name = "create_event_year" maxlength = "4">
+
+                <label for="create_event_month">Month:</label>
+                <select id="create_event_month">
+                    <option disabled selected value>--</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <label for="create_event_day">Day:</label>
+                <input type = "tel" style="width:30px;" id = "create_event_day" name = "create_event_day" maxlength = "2">
+                
+                <label for="create_event_hour">Hour: </label>
+                <select id="create_event_hour">
+                    <option disabled selected value>--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+
+                <label for="create_event_min">Min: </label>
+                <select id="create_event_min">
+                    <option disabled selected value>--</option>
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select>
+
+                <label for="create_event_location">Location:</label>
+                <input type = "text" style="width:90px;" id = "create_event_location" name = "create_event_location">
+
+                <label for="create_event_tag">Tag:</label>
+                <select id="create_event_tag">
+                    <option disabled selected value>--</option>
+                    <option value="1">Class (red)</option>
+                    <option value="2">Work (blue)</option>
+                    <option value="3">Social (green)</option>
+                    <option value="4">Travel (yellow)</option>
+                    <option value="5">Self-care (purple)</option>
+                </select>
+            </div>
+            <div>
+                <p> </p>
+            </div>
+            <div class = "event_planning">
+                <button type="submit" id="create_event_button">Create Event</button>
+            </div>
+        </div>
+        <br>
+
+        <!--user can edit existing events-->
+        <div class="hover_here">
+            <h3>Edit an event:</h3>
+            <div class="event_planning">
+                <h4>Old event:</h4>
+                <label for="edit_event_name">Event Name:</label>
+                <input type="text" id="edit_event_name" required>
+
+                <label for="edit_event_year">Year:</label>
+                <input type = "tel" style="width:50px;" id = "edit_event_year" name = "edit_event_year" maxlength = "4">
+
+                <label for="edit_event_month">Month:</label>
+                <select id="edit_event_month">
+                    <option disabled selected value>--</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <label for="edit_event_day">Day:</label>
+                <input type = "tel" style="width:30px;" id = "edit_event_day" name = "edit_event_day" maxlength = "2">
+                
+                <label for="edit_event_hour">Hour: </label>
+                <select id="edit_event_hour">
+                    <option disabled selected value>--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+
+                <label for="edit_event_min">Min: </label>
+                <select id="edit_event_min">
+                    <option disabled selected value>--</option>
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select>
+
+                <br><br><br>
+                <h4>Updated event:</h4>
+                <label for="updated_event_name">Event Name:</label>
+                <input type="text" id="updated_event_name" required>
+
+                <label for="updated_event_year">Year:</label>
+                <input type = "tel" style="width:50px;" id = "updated_event_year" name = "updated_event_year" maxlength = "4">
+
+                <label for="updated_event_month">Month:</label>
+                <select id="updated_event_month">
+                    <option disabled selected value>--</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <label for="updated_event_day">Day:</label>
+                <input type = "tel" style="width:30px;" id = "updated_event_day" name = "updated_event_day" maxlength = "2">
+                
+                <label for="updated_event_hour">Hour: </label>
+                <select id="updated_event_hour">
+                    <option disabled selected value>--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+
+                <label for="updated_event_min">Min: </label>
+                <select id="updated_event_min">
+                    <option disabled selected value>--</option>
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select>
+            </div>
+            <div>
+                <p> </p>
+            </div>
+            <div class = "event_planning">
+                <button type="submit" id="updated_event_button">Update Event</button>
+            </div>
+        </div>
+        <br>
+
+        <!--user can delete existing events-->
+        <div class="hover_here">
+            <h3>Delete an event:</h3>
+            <div class="event_planning">
+                <label for="delete_event_name">Event Name:</label>
+                <input type="text" id="delete_event_name" required>
+
+                <label for="delete_event_year">Year:</label>
+                <input type = "tel" style="width:50px;" id = "delete_event_year" name = "delete_event_year" maxlength = "4">
+
+                <label for="delete_event_month">Month:</label>
+                <select id="delete_event_month">
+                    <option disabled selected value>--</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <label for="delete_event_day">Day:</label>
+                <input type = "tel" style="width:30px;" id = "delete_event_day" name = "delete_event_day" maxlength = "2">
+                
+                <label for="delete_event_hour">Hour: </label>
+                <select id="delete_event_hour">
+                    <option disabled selected value>--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                </select>
+
+                <label for="delete_event_min">Min: </label>
+                <select id="delete_event_min">
+                    <option disabled selected value>--</option>
+                    <option value="0">00</option>
+                    <option value="5">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                </select>
+            </div>
+            <div>
+                <p> </p>
+            </div>
+            <div class = "event_planning">
+                <button type="submit" id="delete_event_button">Delete Event</button>
+            </div>
+        </div>
+        <br>
+        <div>
+            <p> </p>
+        </div>
+        <div class="hover_here">
+            <div style="text-align:center">
+                <button type="submit" style="text-align:center" id="display_event_list_button">Display Event List</button>
+            </div>
+            <div id = "list_events_below"></div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,174 @@
+body{
+    background-image: url("https://lh3.googleusercontent.com/V29QqoaDDHt9UXYFRXuqYIaDYElX0p4QmGsMtp6ji2qUa7aQuJNJ0UHFp_9u9HENYY1HgMvmxR-fO8mVzTUyT7fYU4uakbrN0fSTSlMMATeHVn4p36Ncm_00wCxSOnGpBXoOwtUQzQ=w2400");
+    background-size: cover;
+}
+
+.legend{
+    display: flex;
+    text-align: left;
+    width: 175px;
+    margin-left: 43%;
+    background-color: rgba(128, 128, 128, 0.411);
+}
+
+.l-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+}
+.l-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+}
+.l-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+}
+ul.l-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 3px solid #999;
+}
+
+#calendar_display{
+    display: flex;
+}
+
+/* class */
+.tag_1 {
+    color:red;
+}
+
+/* work */
+.tag_2 {
+    color:blue;
+}
+
+/* social */
+.tag_3 {
+    color:green;
+}
+
+/* travel */
+.tag_4 {
+    color:yellow;
+}
+
+/* self-care */
+.tag_5 {
+    color:purple;
+}
+
+
+table{
+    border: 4px black solid;
+    background-color: rgba(204, 214, 233, 0.712);
+}
+
+th,td{
+    border: 2px black solid;
+}
+
+td{
+    height: 80px;
+    width: 160px;
+}
+
+#button_holder{
+    height: 100%;
+}
+
+.change_month{
+    border-radius: 15px;
+    border: 3px white outset;
+    width:140px;
+    height: 50px;
+    background-color: rgba(255, 255, 255, 0.699);
+    opacity: 0.8;
+    margin-top:270px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.is_active_user{
+    width:fit-content;
+}
+
+#log_out_button{
+    padding: 2px;
+    border: 1px black outset;
+    background-color: rgba(241, 32, 32, 0.685);
+}
+
+#current_date{
+    width: 100%;
+
+}
+
+.hover_here{
+    background-color: rgba(255, 255, 255, 0.616);
+    padding: 10px;
+    border-radius: 10px;
+    width: 90%;
+    margin-left: 5%;
+}
+
+
+
+
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
